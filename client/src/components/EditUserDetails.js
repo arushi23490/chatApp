@@ -53,16 +53,6 @@ const EditUserDetails = ({ onClose, user }) => {
       };
     });
   };
-  const handleClear = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setData((preve) => {
-      return {
-        ...preve,
-        profile_pic: "",
-      };
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +76,7 @@ const EditUserDetails = ({ onClose, user }) => {
       }
     } catch (error) {
       console.log(error);
-      taost.error("error");
+      taost.error();
     }
   };
   return (
@@ -95,7 +85,7 @@ const EditUserDetails = ({ onClose, user }) => {
         <h2 className="font-semibold">Profile Details</h2>
         <p className="text-sm ">Edit user details</p>
 
-        <form className="grid gap-3 mt-3">
+        <form className="grid gap-3 mt-3" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1">
             <label htmlFor="name">Name:</label>
             <input
@@ -117,7 +107,6 @@ const EditUserDetails = ({ onClose, user }) => {
                 imageUrl={data?.profile_pic}
                 name={data?.name}
               />
-
               <label htmlFor="profile_pic">
                 <button
                   className="font-semibold"
@@ -133,9 +122,6 @@ const EditUserDetails = ({ onClose, user }) => {
                   ref={uploadPhotoRef}
                 />
               </label>
-              <button className="text-red-500" onClick={handleClear}>
-                Remove Photo
-              </button>
             </div>
           </div>
 
